@@ -1,0 +1,94 @@
+import Link from 'next/link';
+import Head from 'next/head';
+import Script from 'next/script';
+import Layout from '../../components/layout';
+// import styles from '../../styles/first-post.css'
+export default function FirstPost({json}) {
+  return (
+    
+    <Layout>
+        <div >
+        <ul>
+        {json.map((item)=>{
+          <li>
+          <span>{item.id}</span>
+          <span>{item.name}</span>
+          <span>{item.age}</span>
+          </li>
+        })}
+        </ul>
+    </div>
+    <Head>
+        <title>First Post</title>
+      </Head>
+      <h1>First Post</h1>
+      <h2>
+        <Link href="/">Back to home</Link>
+      </h2>
+    </Layout>
+     
+  );
+}
+
+export async function getStaticProps(){
+  let json = [// [object Object] 
+  {
+    "name": "Bob",
+    "age": 20,
+    "id": 2
+  },// [object Object] 
+  {
+    "name": "Eve",
+    "age": 35,
+    "id": 5
+  },// [object Object] 
+  {
+    "name": "Frank",
+    "age": 40,
+    "id": 6
+  },// [object Object] 
+  {
+    "name": "Frank",
+    "age": 40,
+    "id": 6
+  },// [object Object] 
+  {
+    "name": "Charlie",
+    "age": 25,
+    "id": 3
+  },// [object Object] 
+  {
+    "name": "Frank",
+    "age": 40,
+    "id": 6
+  }]
+
+  const res = await fetch("http://127.0.0.1:4523/m1/2880094-0-default/getPropsData")
+  console.log(res)
+  const data = await res.json()
+  console.log(data)
+  return {
+    props:{
+      json
+    }
+  }
+} 
+// fetch("http://127.0.0.1:4523/m1/2880094-0-default/getPropsData",{method:"GET"}).then(res=>{
+//   console.log(res)
+// }).catch(e=>{
+//   console.log(e)
+// })
+// const res = await fetch("http://127.0.0.1:4523/m1/2880094-0-default/getPropsData")
+// console.log(res)
+// const data = await res.data
+    // <div >
+    //     <ul>
+    //     {data.map((item)=>{
+    //       <li>
+    //       <span>{item.id}</span>
+    //       <span>{item.name}</span>
+    //       <span>{item.age}</span>
+    //       </li>
+    //     })}
+    //     </ul>
+    // </div>
